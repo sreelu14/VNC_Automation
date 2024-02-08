@@ -39,6 +39,7 @@ public class Base_class{
 	public Common_Login_Page clp;
 	public DashboardPage dp;
 	public StudentAttendance sa;
+	public Base_page bp;
 
 	@BeforeClass
 	public void start() throws InterruptedException {
@@ -75,6 +76,7 @@ public class Base_class{
 		  clp = new Common_Login_Page(driver);
 		   dp = new DashboardPage(driver);
 		   sa = new StudentAttendance(driver);
+		   bp = new Base_page(driver);
 	}
 	@AfterMethod
     public void afterMethod(ITestResult result) {
