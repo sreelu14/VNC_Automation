@@ -1,0 +1,56 @@
+15:22:35.402 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+15:23:02.128 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+15:23:04.939 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+15:23:07.194 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+16:53:05.871 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+16:53:21.238 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+16:53:24.240 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+16:53:26.688 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+16:55:05.293 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+16:55:21.217 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+16:55:24.027 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+16:55:26.698 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:17:17.841 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:17:30.824 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:17:33.486 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:17:35.918 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:18:07.528 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:18:18.709 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:18:21.383 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:18:23.482 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:23:15.045 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:23:26.081 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:23:28.907 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:23:31.274 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:24:59.890 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:25:12.248 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:25:14.940 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:25:17.050 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:27:22.659 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:27:33.523 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:27:36.176 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:27:38.299 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:28:19.623 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:28:31.502 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:28:34.147 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:28:36.427 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+18:31:52.205 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+18:32:02.863 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+18:32:05.751 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+18:32:07.922 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+10:55:10.999 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+10:55:22.603 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+10:55:25.854 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+10:55:28.001 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+11:03:42.824 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+11:03:53.188 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+11:03:55.900 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+11:03:58.022 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+11:04:40.088 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+11:04:52.211 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+11:04:54.862 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+11:04:57.081 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
+11:05:55.071 [main] INFO  com.eduwis.testcases.TS_001_TC_AT_SA_0001 - chrome browser is launched 
+11:06:07.490 [main] INFO  com.eduwis.pageObjects.StudentAttendance - valid details 
+11:06:10.188 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Class Count extracted
+11:06:12.329 [main] INFO  com.eduwis.pageObjects.StudentAttendance - Clicked on Class_Dropdown
