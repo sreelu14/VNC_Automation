@@ -24,14 +24,27 @@ public class TS_001_TC_AT_SA_0001 extends Base_class {
 	  Assert.assertTrue(actual, "msg not valid");
 	  
 	  sa.ClickOn_ClassDropdown();
-	  sa.Select_Class();
-	  	  Assert.assertEquals(ac.newCount, sa.ActualCount,"the counts are not equal");	
+	  sa.Select_Class("Grade-I");
+	  Assert.assertEquals(ac.newCount, sa.ActualCount,"the Class counts are not equal");	
+	  logs.info("Class Dropdown Validated Successfully");
   }
+  
   @Test(dependsOnMethods = "ClassDropdownValidation")
-  public void SectionDropdownValidation() {
+  public void SectionDropdownValidation() throws InterruptedException {
 	
 	  dp.ClickOnAcademics_Module();
 	  dp.ClickOnClass_Submodule();
+
+	  ac.getSections("Grade-I");
+	  dp.ClickOnAttendance_Module();
+	  dp.ClickOnStudentAttendance_Submodule();
+	  sa.Select_Class("Grade-I");
+	  Thread.sleep(2000);
+      sa.Select_Section("Genius");
+      Assert.assertEquals(sa.ActSectionCount,ac.ExpSectionCount,"the section counts are not equal");
+	  logs.info("Section Dropdown Validated Successfully");
+
+
 	 int seccount= ac.getSection("Grade-I");
 	  dp.ClickOnAttendance_Module();
 	  dp.ClickOnStudentAttendance_Submodule();
@@ -41,14 +54,37 @@ public class TS_001_TC_AT_SA_0001 extends Base_class {
      System.out.println(secsize);
       Assert.assertEquals(seccount, secsize,"section options are not being fetched correctly");
       
+
   }
+  
   @Test(dependsOnMethods="SectionDropdownValidation")
   public void StudentAttendance_Searching() throws InterruptedException {
-	  sa.selectYearAndMonth("2023", "Jun", "2");
+	  bp.selectDate("2023","Dec", "2");
 	  sa.Click_Search();
+	  Assert.assertTrue(sa.results.isDisplayed()," 'No data available in table' is displayed ");
+  }
+  
+  @Test (dependsOnMethods="StudentAttendance_Searching")
+  public void AttendenceMarking() {
       sa.StudentListTable("uyy98");
       sa.Click_SaveAttendanceBtn();
-      Assert.assertEquals(true, sa.MsgValidation(),"Succes msg not displayed");
-      Thread.sleep(2000);
+      Assert.assertTrue(sa.MsgValidation(),"Success msg not displayed"); 
       }
+  
+  @Test (dependsOnMethods="StudentAttendance_Searching",priority=1)
+  public void HolidayMarking() throws InterruptedException {
+	  sa.Select_Class("Grade-I");
+	  sa.Select_Section("Genius");
+	  bp.selectDate("2024", "Jan", "1");
+	  sa.Click_Search();
+	  sa.ClickOnMarkHoliday();
+	 // Assert.assertEquals(bp.ActualConfirmationMsg, bp.ExpectedConfirmationMsg,"No popup displayed");
+	  bp.DismissPopup();
+	  Assert.assertTrue(sa.MarkHolidayCheckbox.isDisplayed());
+	  sa.ClickOnMarkHoliday();
+	  bp.AcceptPopup();
+	  //Assert.assertFalse(sa.MarkHolidayCheckbox.isDisplayed());
+  }
+  
+  
 }

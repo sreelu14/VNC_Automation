@@ -5,15 +5,18 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -116,5 +119,75 @@ public class Base_page {
 			log.info("element not visible");
 		}
 	}
+	//DatePickers
+	 @FindBy(id="date")private WebElement datePickerInput ;
+	 @FindBy(xpath="(//th[@class='datepicker-switch'])[1]")private WebElement Month_Year_Btn;
+	 @FindBy(xpath="//tr/td[@class='active day' or @class='day']")private List<WebElement> Dates;
+	 @FindBy(xpath="(//th[@class='datepicker-switch'])[2]")private WebElement Year_Btn;
+	 @FindBy(xpath="//span[@class='month' or @class='month active']")private List<WebElement> Months;
+	 @FindBy(xpath="//span[contains(@class,'year')]")private List<WebElement> Years;
+	 
+	 public void selectDate(String targetYear, String targetMonth, String targetDay) {
+		    datePickerInput.click();
+
+		    String existingMonthYear = Month_Year_Btn.getText();
+
+		    if (existingMonthYear.contains(targetMonth) && existingMonthYear.contains(targetYear)) {
+		        clickOnTargetDay(targetDay);
+		    } else {
+		        Month_Year_Btn.click();
+
+		        if (Year_Btn.getText().equals(targetYear)) {
+		            clickOnTargetMonth(targetMonth);
+		        } else {
+		            Year_Btn.click();
+		            clickOnTargetYear(targetYear);
+		            clickOnTargetMonth(targetMonth);
+		        }
+		        clickOnTargetDay(targetDay);
+		    }
+		}
+		private void clickOnTargetDay(String targetDay) {
+		    for (WebElement date : Dates) {
+		        if (date.getText().equals(targetDay)) {
+		            date.click();
+		            break;
+		        }
+		    }
+		}
+		private void clickOnTargetMonth(String targetMonth) {
+		    for (WebElement month : Months) {
+		        if (month.getText().equals(targetMonth)) {
+		            month.click();
+		            break;
+		        }
+		    }
+		}
+
+		private void clickOnTargetYear(String targetYear) {
+		    for (WebElement year : Years) {
+		        if (year.getText().equals(targetYear)) {
+		            year.click();
+		            break;
+		        }
+		    }
+		}
+		//Confirmation popup Handling
+		 public String ActualConfirmationMsg;
+		 public String ExpectedConfirmationMsg="Are You Sure?";
+
+		 public void DismissPopup() {
+				WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		    	Alert ConfirmationPopup=wait.until(ExpectedConditions.alertIsPresent());
+		    	ActualConfirmationMsg=ConfirmationPopup.getText();
+		    	ConfirmationPopup.dismiss();
+		 }
+		 public void AcceptPopup() throws InterruptedException {
+				WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		    	Alert ConfirmationPopup=wait.until(ExpectedConditions.alertIsPresent());
+		    	ConfirmationPopup.accept();
+		    	Thread.sleep(2000);
+		 }
+
 
 }

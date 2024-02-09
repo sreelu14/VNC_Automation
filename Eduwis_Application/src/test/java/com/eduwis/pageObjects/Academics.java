@@ -31,8 +31,8 @@ public class Academics extends Base_page {
 		log.info("Class Count extracted");
 	}
 
-
-public int getSection(String classname) {
+public int ExpSectionCount;
+public void getSections(String classname) {
 		int size=rows.size()-1;
 		for(int i=0;i<size;i++) {
 			String name = firstColumnElements.get(i).getText();
@@ -44,7 +44,7 @@ public int getSection(String classname) {
 		        break;
 				}
 		}
-		return secondColumnElements.size();
+		ExpSectionCount=secondColumnElements.size();
 }
 }
 
