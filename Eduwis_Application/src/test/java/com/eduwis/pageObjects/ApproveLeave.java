@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,55 +12,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class StudentAttendance extends Base_page {
+public class ApproveLeave extends Base_page {
 
-	public StudentAttendance(WebDriver driver) {
+	public ApproveLeave(WebDriver driver) {
 		super(driver);
-	}
-	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-	
-	@FindBy(xpath="//select[@id='class_id']")private WebElement Class_Dropdown;
-	@FindBy(xpath="//select[@id='class_id']/option")private List<WebElement> classlist;
+	} 
+	@FindBy(xpath="//select[@id='searchclassid']")private WebElement Class_Dropdown;
+	@FindBy(xpath="//select[@id='searchclassid']/option")private List<WebElement> classlist;
 	@FindBy(name="date")private WebElement Date_Picker;
-	@FindBy(xpath="//button[@value='search']")private WebElement Search_Btn;
-	@FindBy(xpath="//table")public WebElement results;
+	@FindBy(xpath="//button[@value='search_filter']")private WebElement Search_Btn;
 	@FindBy(xpath="//select[@name='section_id']")private WebElement SectionDropdown;
     @FindBy(xpath="//tbody/tr")private List<WebElement>rows;
     @FindBy(xpath="//tbody/tr/td")private List<WebElement>columns;
     @FindBy(xpath="//button[@value='saveattendence']")private WebElement SaveAttendance;
     @FindBy(xpath="//div[@class='alert alert-success text-left']")public WebElement SuccessMessage;
-
-    @FindBy(xpath="//button[@class='btn btn-sm btn-primary']")private WebElement MarkHoliday_Btn;
-    @FindBy(xpath="//i[contains(@class,'unchecked')]")public WebElement MarkHolidayCheckbox;
     @FindBy(xpath="")private WebElement Calender;
-    @FindBy(xpath="(//span[@class='text-danger'])[1]")WebElement errormsg_class;
-    @FindBy(xpath="(//span[@class='text-danger'])[2]")WebElement errormsg_section;
-    @FindBy (xpath="(//span[@class='text-danger'])[3]")WebElement errormsg_date;
+    @FindBy(xpath="(//span[@class='class_id_error text-danger'])[1]")WebElement errormsg_class;
+    @FindBy(xpath="(//span[@class='class_id_error text-danger'])[2]")WebElement errormsg_section;
+    @FindBy(xpath="//tr[@class='odd']")WebElement table_rows;
+    @FindBy(xpath="//button[@class='btn btn-sm btn-primary ']") WebElement Add_button;
+    @FindBy(xpath="//h4[contains(text(),'Add Leave')]")WebElement AddLeave_Modal;
     
    
-    
-	public void StudentListTable(String student) {
-		int Rcount = rows.size();
-		//System.out.println(Rcount);
-		int Ccount = columns.size();
-		//System.out.println(Ccount);
-		for (int r = 1; r <= Rcount; r++) {
-			for (int c = 2; c <= 4; c++) {
-				String data = driver
-						.findElement(By.xpath("//*[@id='DataTables_Table_0']/tbody/tr["+r+"]/td["+c+"]"))
-						.getText();
-				if(data.equals(student)) {
-					 driver.findElement(By.xpath("(//input[@value='7'])["+r+"]")).click();
-					 break;
-				 }
-			}
-		}
-	}
-	
-	
 	
 	public int ActualCount;
-	
+	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	
 	public void ClickOn_ClassDropdown() {
 	    wait.until(ExpectedConditions.elementToBeClickable(Class_Dropdown)).click();
@@ -68,29 +45,18 @@ public class StudentAttendance extends Base_page {
 	   // System.out.println("no.of options in class dropdown is "+ActualCount);
 	}
 
-	public void Select_Class(String TargetClass) {
+	public void Select_Class() {
 	    for (WebElement classOption : classlist) {
-	        if (classOption.getText().equals(TargetClass)) {
+	        if (classOption.getText().equals("Grade-I")) {
 	            classOption.click();
 	            break;
 	        }
 	    }
 	}
-	public int ActSectionCount;
-	public void Select_Section(String section) {
+	public int Select_Section(String section) {
 	    wait.until(ExpectedConditions.elementToBeClickable(SectionDropdown)).click();
 		Select sectionlist= new Select(SectionDropdown);
-
-		 ActSectionCount=sectionlist.getOptions().size()-1;
-		// for(WebElement option:sectionlist.getOptions()) {
-			// System.out.println(option.getText());
-		 //}
-		// System.out.println(ActSectionCount);
-		sectionlist.selectByVisibleText(section);
 		int noofOptions=sectionlist.getOptions().size();
-		for(WebElement option:sectionlist.getOptions()) {
-			 System.out.println(option.getText());
-		 }
 		System.out.println("Sectionsize"+noofOptions);
 		int actualcount=noofOptions-1;
 		sectionlist.selectByVisibleText(section);
@@ -103,18 +69,7 @@ public class StudentAttendance extends Base_page {
 	public void Click_Search() {
 	    wait.until(ExpectedConditions.elementToBeClickable(Search_Btn)).click();
 	}
-	public void Click_SaveAttendanceBtn() {
-	    wait.until(ExpectedConditions.elementToBeClickable(SaveAttendance)).click();
-	}
-	public boolean MsgValidation() {
-		boolean value=SuccessMessage.isDisplayed();
-		return value;
-	}
-
-	 public void ClickOnMarkHoliday() {
-		    wait.until(ExpectedConditions.elementToBeClickable(MarkHoliday_Btn)).click();
-	    }
-	   
+	
 	public boolean ErrormsgValidation() {
 		String error_class="The Class field is required.";
 		String error_section="The Section field is required.";
@@ -132,6 +87,33 @@ public class StudentAttendance extends Base_page {
 	//	System.out.println("errormsgvalidation"+temp);
 		return temp;
 	}
-
-
+	
+	public boolean validate_Search() {
+	    boolean temp=false;
+		String empty= "No data available in table ";
+		if(table_rows != null) {
+		if(table_rows.isDisplayed())
+		{
+			temp = true;
+		}
+			
+	}
+		return temp;
+	}
+		
+   public boolean ValidateClickAdd() {
+	  try {
+		  Add_button.click();
+	      wait.until(ExpectedConditions.visibilityOf(AddLeave_Modal));
+	      return true;
+	  }
+	  catch(NoSuchElementException e) {
+		   
+		   return false;
+	  }
+	
+		
+	   
+   }
+	
 }
