@@ -26,6 +26,9 @@ public class StudentAttendance extends Base_page {
     @FindBy(xpath="//button[@value='saveattendence']")private WebElement SaveAttendance;
     @FindBy(xpath="//div[@class='alert alert-success text-left']")public WebElement SuccessMessage;
     @FindBy(xpath="")private WebElement Calender;
+    @FindBy(xpath="(//span[@class='text-danger'])[1]")WebElement errormsg_class;
+    @FindBy(xpath="(//span[@class='text-danger'])[2]")WebElement errormsg_section;
+    @FindBy (xpath="(//span[@class='text-danger'])[3]")WebElement errormsg_date;
     
     
 	public void StudentListTable(String student) {
@@ -70,9 +73,13 @@ public class StudentAttendance extends Base_page {
 	    wait.until(ExpectedConditions.elementToBeClickable(SectionDropdown)).click();
 		Select sectionlist= new Select(SectionDropdown);
 		int noofOptions=sectionlist.getOptions().size();
+		for(WebElement option:sectionlist.getOptions()) {
+			 System.out.println(option.getText());
+		 }
 		System.out.println("Sectionsize"+noofOptions);
+		int actualcount=noofOptions-1;
 		sectionlist.selectByVisibleText(section);
-		return noofOptions;
+		return actualcount;
 	}
 	public void Set_Date(String date) {
 	    wait.until(ExpectedConditions.elementToBeClickable(Date_Picker)).click();
@@ -87,6 +94,23 @@ public class StudentAttendance extends Base_page {
 	public boolean MsgValidation() {
 		boolean value=SuccessMessage.isDisplayed();
 		return value;
+	}
+	public boolean ErrormsgValidation() {
+		String error_class="The Class field is required.";
+		String error_section="The Section field is required.";
+		String actualerror_class=errormsg_class.getText();
+		String actualerror_section=errormsg_section.getText();
+		boolean temp =false;
+		
+		
+		if(errormsg_class.isDisplayed()&&errormsg_section.isDisplayed()) {
+			if(error_class.equalsIgnoreCase(actualerror_class)&& error_section.equalsIgnoreCase(actualerror_section)) 
+				
+			temp=true;
+			}
+				
+	//	System.out.println("errormsgvalidation"+temp);
+		return temp;
 	}
 
 	 @FindBy(id="date")private WebElement datePickerInput ;

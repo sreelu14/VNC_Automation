@@ -6,7 +6,9 @@ import org.testng.annotations.Test;
 import com.eduwis.base.Base_class;
 
 public class TS_001_TC_AT_SA_0001 extends Base_class {
-	 
+  
+
+ 
   @Test
   public void ClassDropdownValidation(){
 	  
@@ -17,6 +19,10 @@ public class TS_001_TC_AT_SA_0001 extends Base_class {
 	  ac.ExpectedCount();
 	  dp.ClickOnAttendance_Module();
 	  dp.ClickOnStudentAttendance_Submodule();
+	  sa.Click_Search();
+	  boolean actual= sa.ErrormsgValidation();
+	  Assert.assertTrue(actual, "msg not valid");
+	  
 	  sa.ClickOn_ClassDropdown();
 	  sa.Select_Class();
 	  	  Assert.assertEquals(ac.newCount, sa.ActualCount,"the counts are not equal");	
@@ -26,11 +32,15 @@ public class TS_001_TC_AT_SA_0001 extends Base_class {
 	
 	  dp.ClickOnAcademics_Module();
 	  dp.ClickOnClass_Submodule();
-	  ac.getSection("Grade-I");
+	 int seccount= ac.getSection("Grade-I");
 	  dp.ClickOnAttendance_Module();
 	  dp.ClickOnStudentAttendance_Submodule();
 	  sa.Select_Class();
-      sa.Select_Section("Genius");
+     int secsize= sa.Select_Section("Genius");
+     System.out.println(seccount);
+     System.out.println(secsize);
+      Assert.assertEquals(seccount, secsize,"section options are not being fetched correctly");
+      
   }
   @Test(dependsOnMethods="SectionDropdownValidation")
   public void StudentAttendance_Searching() throws InterruptedException {

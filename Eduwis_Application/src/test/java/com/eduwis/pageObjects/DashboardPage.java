@@ -14,6 +14,7 @@ public class DashboardPage extends Base_page {
 	}
 	@FindBy(xpath="//span[contains(text(),'Attendance')]")private WebElement Attendance_Module;
 	@FindBy(xpath="(//a[contains(text(),'Student Attendance')])[2]")private WebElement StudentAttendance_Submodule;
+	@FindBy(xpath="(//a[contains(text(),'Approve Leave')])[3]")private WebElement ApproveLeave_Submodule;
 	@FindBy(xpath="//span[contains(text(),'Academics')]")private WebElement Academics_Module;
 	@FindBy(xpath="(//a[contains(text(),'Class')])[6]")private WebElement Class_Submodule;
 	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
@@ -22,6 +23,9 @@ public class DashboardPage extends Base_page {
 	}
 	public void ClickOnStudentAttendance_Submodule() {
 	    wait.until(ExpectedConditions.elementToBeClickable(StudentAttendance_Submodule)).click();
+	}
+	public void ClickOnApproveLeave_Submodule() {
+	    wait.until(ExpectedConditions.elementToBeClickable(ApproveLeave_Submodule)).click();
 	}
 	public void ClickOnAcademics_Module() {
 	    wait.until(ExpectedConditions.elementToBeClickable(Academics_Module)).click();
