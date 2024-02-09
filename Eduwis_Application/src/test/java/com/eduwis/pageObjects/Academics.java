@@ -32,19 +32,19 @@ public class Academics extends Base_page {
 	}
 
 public int ExpSectionCount;
-public void getSections(String classname) {
-		int size=rows.size()-1;
-		for(int i=0;i<size;i++) {
-			String name = firstColumnElements.get(i).getText();
-			System.out.println("gradename "+name);
-			if (name.equalsIgnoreCase(classname))
-				{
-				secondColumnElements = rows.get(i).findElements(By.xpath(".//td[2]/div"));
-		        System.out.println("Sections in Class module : "+secondColumnElements.size());
-		        break;
-				}
-		}
-		ExpSectionCount=secondColumnElements.size();
+public int getSection(String classname) {
+	int size=rows.size()-1;
+	for(int i=0;i<size;i++) {
+		String name = firstColumnElements.get(i).getText();
+		System.out.println("gradename "+name);
+		if (name.equalsIgnoreCase(classname))
+			{
+			secondColumnElements = rows.get(i).findElements(By.xpath(".//td[2]/div"));
+	        System.out.println("Sections in Class module : "+secondColumnElements.size());
+	        break;
+			}
+	}
+	return secondColumnElements.size();
 }
 }
 

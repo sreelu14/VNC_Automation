@@ -6,15 +6,14 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.asserts.SoftAssert;
 
 import com.eduwis.pageObjects.*;
 
@@ -39,9 +38,9 @@ public class Base_class{
 	public Common_Login_Page clp;
 	public DashboardPage dp;
 	public StudentAttendance sa;
-
+	public SoftAssert SAssert;
 	public Base_page bp;
-
+	public AttendanceByDate ad;
 	public ApproveLeave al;
 
 
@@ -75,13 +74,14 @@ public class Base_class{
 		Thread.sleep(3000);
 	}
 	@BeforeClass(dependsOnMethods="start")
-	public void Object_References() {
+	public void Object_References() throws InterruptedException {
 		   ac = new Academics(driver);
 		  clp = new Common_Login_Page(driver);
+		   ad = new AttendanceByDate(driver);
 		   dp = new DashboardPage(driver);
 		   sa = new StudentAttendance(driver);
 		   bp = new Base_page(driver);
-
+		   SAssert=new SoftAssert();
 		   al=  new ApproveLeave(driver);
 
 	}
@@ -115,6 +115,5 @@ public class Base_class{
 	        return null; // Return null in case of any exception
 	    }
 	}
-	
-	}
+}
 

@@ -11,34 +11,25 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class StudentAttendance extends Base_page {
+public class AttendanceByDate extends Base_page {
 
-	public StudentAttendance(WebDriver driver) {
-		super(driver);
+	public AttendanceByDate(WebDriver driver) {
+		super (driver);
 	}
 	
 	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-	
+
 	@FindBy(xpath="//select[@id='class_id']")private WebElement Class_Dropdown;
 	@FindBy(xpath="//select[@id='class_id']/option")private List<WebElement> classlist;
 	@FindBy(name="date")private WebElement Date_Picker;
-	@FindBy(xpath="//button[@value='search']")public WebElement Search_Btn;
+	@FindBy(xpath="//button[@value='search']")private WebElement Search_Btn;
 	@FindBy(xpath="//table")public WebElement results;
 	@FindBy(xpath="//select[@name='section_id']")private WebElement SectionDropdown;
     @FindBy(xpath="//tbody/tr")private List<WebElement>rows;
     @FindBy(xpath="//tbody/tr/td")private List<WebElement>columns;
-    @FindBy(xpath="//button[@value='saveattendence']")private WebElement SaveAttendance;
-    @FindBy(xpath="//div[@class='alert alert-success text-left']")public WebElement SuccessMessage;
-    @FindBy(xpath="//button[@class='btn btn-sm btn-primary']")private WebElement MarkHoliday_Btn;
-    @FindBy(xpath="//i[contains(@class,'unchecked')]")public WebElement MarkHolidayCheckbox;
-    @FindBy(xpath="")private WebElement Calender;
-    @FindBy(xpath="(//span[@class='text-danger'])[1]")public WebElement errormsg_class;
-    @FindBy(xpath="(//span[@class='text-danger'])[2]")WebElement errormsg_section;
-    @FindBy (xpath="(//span[@class='text-danger'])[3]")WebElement errormsg_date;
-    
 
-    public String AttType;
-	public void StudentListTable(String student) {
+    
+    public void StudentListTable(String student) {
 		int Rcount = rows.size();
 		//System.out.println(Rcount);
 		//int Ccount = columns.size();
@@ -49,9 +40,7 @@ public class StudentAttendance extends Base_page {
 						.findElement(By.xpath("//*[@id='DataTables_Table_0']/tbody/tr["+r+"]/td["+c+"]"))
 						.getText();
 				if(data.equals(student)) {
-					 driver.findElement(By.xpath("(//input[@value='7'])["+r+"]")).click();
-					AttType= driver.findElement(By.xpath("(//input[@value='7'])["+r+"]")).getText();
-					 break;
+					
 				 }
 			}
 		}
@@ -83,36 +72,5 @@ public class StudentAttendance extends Base_page {
 		//System.out.println("Sectionsize"+ActSectionCount);
 		sectionlist.selectByVisibleText(section);
 	}
-	
-	
-	public void Click_Search() {
-	    wait.until(ExpectedConditions.elementToBeClickable(Search_Btn)).click();
-	}
-	
-	public void Click_SaveAttendanceBtn() {
-	    wait.until(ExpectedConditions.elementToBeClickable(SaveAttendance)).click();
-	}
-	
-	public boolean MsgValidation() {
-		boolean value=SuccessMessage.isDisplayed();
-		return value;
-	}
-
-	 public void ClickOnMarkHoliday() {
-		    wait.until(ExpectedConditions.elementToBeClickable(MarkHoliday_Btn)).click();
-	    }
-	   
-	public boolean ErrormsgValidation() {
-		String error_class="The Class field is required.";
-		String error_section="The Section field is required.";
-		String actualerror_class=errormsg_class.getText();
-		String actualerror_section=errormsg_section.getText();
-		boolean temp =false;
-		if(errormsg_class.isDisplayed()&&errormsg_section.isDisplayed()) {
-			if(error_class.equalsIgnoreCase(actualerror_class)&& error_section.equalsIgnoreCase(actualerror_section)) 
-			temp=true;
-			}
-	//	System.out.println("errormsgvalidation"+temp);
-		return temp;
-	}
+    
 }
