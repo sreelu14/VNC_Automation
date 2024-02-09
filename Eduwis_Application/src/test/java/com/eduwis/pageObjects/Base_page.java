@@ -182,10 +182,11 @@ public class Base_page {
 		    	ActualConfirmationMsg=ConfirmationPopup.getText();
 		    	ConfirmationPopup.dismiss();
 		 }
-		 public void AcceptPopup() {
+		 public void AcceptPopup() throws InterruptedException {
 				WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 		    	Alert ConfirmationPopup=wait.until(ExpectedConditions.alertIsPresent());
 		    	ConfirmationPopup.accept();
+		    	Thread.sleep(2000);
 		 }
 
 

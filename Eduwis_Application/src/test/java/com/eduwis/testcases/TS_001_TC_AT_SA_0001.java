@@ -54,7 +54,7 @@ public class TS_001_TC_AT_SA_0001 extends Base_class {
       }
   
   @Test (dependsOnMethods="StudentAttendance_Searching",priority=1)
-  public void HolidayMarking() {
+  public void HolidayMarking() throws InterruptedException {
 	  sa.Select_Class("Grade-I");
 	  sa.Select_Section("Genius");
 	  bp.selectDate("2024", "Jan", "1");
